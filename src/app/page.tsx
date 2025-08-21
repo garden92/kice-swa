@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import questionsData from '../data/questions.json';
+import React, { useState, useMemo } from 'react';
+import questionsData from '../data/all-questions.json';
+import questionTableData from '../data/question-table.json';
 
 interface Question {
   id: string;
   number: string;
+  type: string;
   module: string;
-  subModule: string;
+  subModule?: string;
   title: string;
   difficulty?: string;
   points?: number;
@@ -19,15 +21,28 @@ interface Question {
   references?: string[];
 }
 
+interface QuestionCategory {
+  category: string;
+  totalQuestions: number;
+  totalPoints: number;
+  subcategories: {
+    name: string;
+    topics: string[];
+    references: string[];
+    relatedQuestions: string[];
+  }[];
+}
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedModule, setSelectedModule] = useState('all');
   const [expandedQuestions, setExpandedQuestions] = useState<Set<string>>(new Set());
 
   const questions = questionsData as Question[];
+  const questionTable = questionTableData as QuestionCategory[];
 
   const modules = useMemo(() => {
-    const moduleSet = new Set(questions.map(q => q.module));
+    const moduleSet = new Set(questions.map(q => q.type || q.module));
     return ['all', ...Array.from(moduleSet)];
   }, [questions]);
 
@@ -35,7 +50,7 @@ export default function Home() {
     let filtered = questions;
 
     if (selectedModule !== 'all') {
-      filtered = filtered.filter(q => q.module === selectedModule);
+      filtered = filtered.filter(q => (q.type || q.module) === selectedModule);
     }
 
     if (searchQuery.trim()) {
@@ -45,7 +60,7 @@ export default function Home() {
         (q.question && q.question.toLowerCase().includes(query)) ||
         (q.content && q.content.some(c => c.toLowerCase().includes(query))) ||
         q.keywords.some(k => k.toLowerCase().includes(query)) ||
-        q.subModule.toLowerCase().includes(query)
+        (q.subModule && q.subModule.toLowerCase().includes(query))
       );
     }
 
@@ -78,8 +93,93 @@ export default function Home() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8 space-y-4">
-          <div className="flex flex-col md:flex-row gap-4">
+        {/* 예상문제 표 섹션 */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">KICE Software Architect 예상문제 개요</h2>
+          
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="min-w-full">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">대모듈</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">소모듈</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">주요 주제</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">문항수</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">점수</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {questionTable.map((category, categoryIndex) => (
+                    <React.Fragment key={categoryIndex}>
+                      {category.subcategories.map((subcategory, subIndex) => (
+                        <tr key={`${categoryIndex}-${subIndex}`} className="hover:bg-gray-50">
+                          {subIndex === 0 && (
+                            <td 
+                              rowSpan={category.subcategories.length}
+                              className="px-6 py-4 text-sm font-medium text-gray-900 border-r border-gray-200 bg-blue-50"
+                            >
+                              <div className="flex flex-col">
+                                <span className="font-semibold">{category.category}</span>
+                                <span className="text-xs text-gray-600 mt-1">
+                                  {category.totalQuestions}문항 / {category.totalPoints}점
+                                </span>
+                              </div>
+                            </td>
+                          )}
+                          <td className="px-6 py-4 text-sm font-medium text-gray-700">
+                            {subcategory.name}
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-600">
+                            <ul className="list-disc list-inside space-y-1">
+                              {subcategory.topics.slice(0, 3).map((topic, topicIndex) => (
+                                <li key={topicIndex} className="leading-relaxed">{topic}</li>
+                              ))}
+                              {subcategory.topics.length > 3 && (
+                                <li className="text-gray-400 italic">... 외 {subcategory.topics.length - 3}개</li>
+                              )}
+                            </ul>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-900 text-center">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              {subIndex === 0 ? `${category.totalQuestions}문항` : ''}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-900 text-center">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                              {subIndex === 0 ? `${category.totalPoints}점` : ''}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            {/* 총계 표시 */}
+            <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-gray-700">총 예상문제</span>
+                <div className="flex space-x-4">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    {questionTable.reduce((sum, cat) => sum + cat.totalQuestions, 0)}문항
+                  </span>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    {questionTable.reduce((sum, cat) => sum + cat.totalPoints, 0)}점
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* 실제 문제 섹션 */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">실제 추출된 기출문제</h2>
+          
+          <div className="mb-6 space-y-4">
+            <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               placeholder="문제 검색... (제목, 내용, 키워드)"
@@ -100,12 +200,12 @@ export default function Home() {
             </select>
           </div>
           
-          <div className="text-sm text-gray-600">
-            {filteredQuestions.length}개의 문제가 검색되었습니다.
+            <div className="text-sm text-gray-600">
+              {filteredQuestions.length}개의 문제가 검색되었습니다.
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-4">
+          <div className="space-y-4">
           {filteredQuestions.map((question) => (
             <div
               key={question.id}
@@ -136,11 +236,13 @@ export default function Home() {
                         </span>
                       )}
                       <span className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                        {question.module}
+                        {question.type || question.module}
                       </span>
-                      <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                        {question.subModule}
-                      </span>
+                      {question.subModule && (
+                        <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                          {question.subModule}
+                        </span>
+                      )}
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900">
                       {question.title}
@@ -251,6 +353,7 @@ export default function Home() {
               )}
             </div>
           ))}
+          </div>
         </div>
       </div>
     </div>
