@@ -1,0 +1,252 @@
+[
+  {
+    "category": "Software Architecture 핵심",
+    "totalQuestions": 13,
+    "totalPoints": 50,
+    "subcategories": [
+      {
+        "name": "I/F 기반 Data 동기화",
+        "topics": [
+          "I/F 기반의 Data 동기화 문제",
+          "EAI를 통한 트랜잭션 처리 방식",
+          "실시간 데이터 동기화",
+          "SAGA 패턴 vs 2PC(Two-Phase Commit)",
+          "분산 시스템 간의 데이터 일관성 추적",
+          "보상 트랜잭션(Compensating Transaction)"
+        ],
+        "references": [
+          "예상문제 #1, #5 - I/F 기반 Data 동기화"
+        ],
+        "relatedQuestions": [
+          "문제 #1: I/F 기반의 Data 동기화 문제"
+        ]
+      },
+      {
+        "name": "JVM 구조 및 동작 특성",
+        "topics": [
+          "JVM Memory 튜닝 및 최적화",
+          "Heap 메모리 관리 및 GC 성능 개선",
+          "OutOfMemoryError 분석 및 해결",
+          "JVM 옵션 설정 및 모니터링",
+          "Kubernetes 환경에서의 JVM 최적화",
+          "메모리 누수 방지 및 성능 분석"
+        ],
+        "references": [
+          "예상문제 #2 - JVM"
+        ],
+        "relatedQuestions": [
+          "문제 #5: JVM Memory 튜닝",
+          "문제 #1-5: JVM 관련 심화 문제들"
+        ]
+      },
+      {
+        "name": "WAS 성능 최적화",
+        "topics": [
+          "DBCP(Database Connection Pool) 설정 최적화",
+          "Connection Pool 성능 튜닝",
+          "WAS 성능 개선 방안",
+          "데이터베이스 연결 관리",
+          "Connection Leak 방지"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #4: WAS 성능 개선 - DBCP 설정"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Software Architecture 설계/구축",
+    "totalQuestions": 9,
+    "totalPoints": 32,
+    "subcategories": [
+      {
+        "name": "Framework 적용",
+        "topics": [
+          "Reactive Programming 개념 및 구현",
+          "Spring WebFlux 비동기 처리",
+          "Flux vs Mono 데이터 처리 방식",
+          "Non-blocking I/O 및 백프레셔",
+          "Spring Boot 비동기 처리",
+          "Thread Pool 최적화"
+        ],
+        "references": [
+          "예상문제 #4 - Framework"
+        ],
+        "relatedQuestions": [
+          "문제 #2: Reactive Programming 개념 이해",
+          "문제 #3: Spring Boot 비동기 처리"
+        ]
+      },
+      {
+        "name": "Frontend 개발",
+        "topics": [
+          "JavaScript 객체 Scope 및 클로저",
+          "Browser 내 DOM 구조 최적화",
+          "Frontend 성능 최적화 기법",
+          "JavaScript 비동기 처리",
+          "DOM 조작 및 브라우저 성능"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #6: Frontend Browser 객체 Scope",
+          "문제 #7: DOM 조작과 브라우저 성능"
+        ]
+      },
+      {
+        "name": "네트워크 및 연결 관리",
+        "topics": [
+          "TCP Connection Pool 최적화",
+          "HTTP Keep-Alive 설정",
+          "네트워크 연결 관리",
+          "Connection Pool 튜닝"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #4: TCP Connection Pool과 HTTP Keep-Alive"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "신기술",
+    "totalQuestions": 2,
+    "totalPoints": 7,
+    "subcategories": [
+      {
+        "name": "Microservice Architecture",
+        "topics": [
+          "MSA Service Mesh 개념 및 구현",
+          "Istio 활용 Service Mesh 구성",
+          "Envoy Proxy 사이드카 패턴",
+          "서비스 간 mTLS 암호화",
+          "Circuit Breaker 패턴",
+          "SAGA 패턴 구현 및 분산 트랜잭션"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #3: MSA Service Mesh 개념",
+          "문제 #11: SAGA 패턴 개념"
+        ]
+      },
+      {
+        "name": "Cloud Service",
+        "topics": [
+          "Kubernetes Pod QoS 개념",
+          "Pod LifeCycle 관리",
+          "Resource 할당 및 제한 정책",
+          "Container 리소스 최적화",
+          "Kubernetes 클러스터 관리"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #7: Kubernetes Pod QoS 개념"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Software Architecture 환경",
+    "totalQuestions": 1,
+    "totalPoints": 4,
+    "subcategories": [
+      {
+        "name": "프로토콜 및 네트워크",
+        "topics": [
+          "HTTP Protocol 심화 이해",
+          "HTTP/2 vs HTTP/1.1 성능 비교",
+          "네트워크 성능 최적화",
+          "프로토콜 레벨 튜닝",
+          "멀티플렉싱 및 헤더 압축"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #10: HTTP Protocol 심화"
+        ]
+      },
+      {
+        "name": "캐시 및 성능 최적화",
+        "topics": [
+          "CDN 기능과 활용 전략",
+          "콘텐츠 전송 네트워크 최적화",
+          "엣지 캐싱 및 성능 개선",
+          "글로벌 성능 최적화"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #9: CDN 기능과 활용"
+        ]
+      },
+      {
+        "name": "보안 및 인증",
+        "topics": [
+          "JWT 보안 고려사항",
+          "토큰 기반 인증 시스템",
+          "보안 토큰 관리",
+          "인증 시스템 설계"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #12: JWT 보안 고려사항"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Software Architecture 운영/문제해결",
+    "totalQuestions": 5,
+    "totalPoints": 19,
+    "subcategories": [
+      {
+        "name": "성능 최적화 및 모니터링",
+        "topics": [
+          "JVM Memory 최적화 및 GC 튜닝",
+          "시스템 성능 분석 및 개선",
+          "애플리케이션 성능 모니터링",
+          "병목 지점 식별 및 해결"
+        ],
+        "references": [],
+        "relatedQuestions": [
+          "문제 #5: JVM Memory 최적화와 GC 튜닝"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "기타 (추가 심화 문제)",
+    "totalQuestions": 15,
+    "totalPoints": 54,
+    "subcategories": [
+      {
+        "name": "분산 시스템 및 데이터 동기화",
+        "topics": [
+          "Interface 기반 시스템 연동",
+          "분산 환경에서의 데이터 일관성",
+          "실시간 동기화 메커니즘",
+          "트랜잭션 처리 패턴"
+        ],
+        "references": [
+          "예상문제 #5 시리즈"
+        ],
+        "relatedQuestions": [
+          "다수의 I/F 기반 데이터 동기화 심화 문제들"
+        ]
+      },
+      {
+        "name": "메시지 큐 및 클러스터링",
+        "topics": [
+          "Kafka 클러스터 설정 및 성능 최적화",
+          "Redis 클러스터 고가용성 구성",
+          "Consumer Group 리밸런싱",
+          "Stream Processing 최적화"
+        ],
+        "references": [
+          "예상문제 #6 - Kafka/Redis"
+        ],
+        "relatedQuestions": [
+          "문제 #1-6: Kafka/Redis 클러스터링 시리즈"
+        ]
+      }
+    ]
+  }
+]

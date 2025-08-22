@@ -1,0 +1,1025 @@
+[
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 핵심",
+    "title": "I/F 기반의 Data 동기화 문제",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "대내 시스템 간 실시간 데이터 동기화를 위해 EAI를 통한 트랜잭션 처리 방식을 설계 중이다. 아래 설명 중 올바르지 않은 것은?",
+    "choices": [
+      "① EAI에서 트랜잭션 실패 시 보상 트랜잭션(Compensating Transaction)을 통해 데이터 정합성을 유지할 수 있다.",
+      "② 실시간 동기화에서는 2PC(Two-Phase Commit)보다 SAGA 패턴이 더 적합하다.",
+      "③ EAI 허브를 통한 동기화는 각 시스템이 직접 연결되는 방식보다 결합도를 낮춘다.",
+      "④ 트랜잭션 ID를 통해 분산된 시스템 간의 데이터 일관성을 추적할 수 있다.",
+      "⑤ EAI에서 동기 방식 호출 시 타임아웃이 발생하면 자동으로 비동기 방식으로 전환된다."
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. EAI에서 동기/비동기 호출 방식은 아키텍처 설계 시점에 결정되는 통신 패턴입니다. 타임아웃 발생 시 자동으로 통신 방식이 전환되지 않으며, Circuit Breaker나 Retry Policy 등을 별도로 구현해야 합니다.",
+    "keywords": [
+      "SAGA"
+    ],
+    "id": 1
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 핵심",
+    "title": "Reactive Programming 개념 이해",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "Spring WebFlux를 사용한 비동기 처리에서 다음 중 올바른 설명은?",
+    "choices": [
+      "① Flux는 0-1개의 데이터를 처리하고, Mono는 0-N개의 데이터를 처리한다.",
+      "② 비동기 처리에서는 스레드 블로킹이 발생하지 않으므로 더 많은 동시 요청을 처리할 수 있다.",
+      "③ WebFlux는 내부적으로 Servlet Container를 사용한다.",
+      "④ 비동기 처리 시 예외 처리는 try-catch 블록으로만 가능하다.",
+      "⑤ CompletableFuture와 Reactor는 동일한 개념이다."
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. 비동기 논블로킹 방식은 I/O 작업 시 스레드가 블로킹되지 않아 적은 수의 스레드로 많은 동시 요청을 효율적으로 처리할 수 있습니다. 이는 리액티브 프로그래밍의 핵심입니다.",
+    "keywords": [
+      "SPRING",
+      "REACT",
+      "SERVLET"
+    ],
+    "id": 2
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #1",
+    "module": "신기술",
+    "title": "MSA Service Mesh 개념",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Istio를 활용한 Service Mesh 환경에서 다음 중 잘못된 설명은?",
+    "choices": [
+      "① Envoy Proxy는 각 서비스의 사이드카로 배포되어 네트워크 트래픽을 제어한다.",
+      "② Istio-proxy를 통해 서비스 간 mTLS 암호화가 자동으로 적용된다.",
+      "③ Circuit Breaker 기능을 통해 장애 전파를 방지할 수 있다.",
+      "④ Service Mesh를 적용하면 기존 애플리케이션 코드를 대폭 수정해야 한다.",
+      "⑤ 트래픽 라우팅 규칙을 통해 카나리 배포가 가능하다."
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. Service Mesh의 핵심 가치는 애플리케이션 코드 수정 없이 사이드카 프록시를 통해 서비스 간 통신을 제어하는 것입니다. 이는 Service Mesh의 목적과 정반대되는 설명입니다.",
+    "keywords": [
+      "CIRCUIT BREAKER",
+      "SERVICE MESH",
+      "ISTIO",
+      "ENVOY"
+    ],
+    "id": 3
+  },
+  {
+    "questionNumber": 4,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 설계/구축",
+    "title": "WAS 성능 개선 - DBCP 설정",
+    "difficulty": "상급",
+    "points": 4,
+    "questionText": "Tomcat에서 DBCP 설정을 통한 성능 최적화 시 다음 중 잘못된 설정은? <Resource name=\"jdbc/myDB\" type=\"javax.sql.DataSource\" driverClassName=\"oracle.jdbc.driver.OracleDriver\" url=\"jdbc:oracle:thin:@localhost:1521:XE\" username=\"user\" password=\"pass\" maxTotal=\"50\" maxIdle=\"30\" minIdle=\"10\" initialSize=\"5\" validationQuery=\"SELECT 1 FROM DUAL\" testOnBorrow=\"true\" testWhileIdle=\"false\" timeBetweenEvictionRunsMillis=\"30000\" minEvictableIdleTimeMillis=\"60000\" />",
+    "choices": [
+      "① validationQuery를 설정하여 연결 유효성을 검증하고 있다.",
+      "② testWhileIdle을 false로 설정하여 유휴 연결 검증을 비활성화했다.",
+      "③ maxTotal이 maxIdle보다 큰 값으로 설정되어 있다.",
+      "④ minEvictableIdleTimeMillis가 timeBetweenEvictionRunsMillis보다 크게 설정되어 있다.",
+      "⑤ initialSize가 minIdle보다 작게 설정되어 있다."
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. testWhileIdle을 false로 설정하여 유휴 연결 검증을 비활성화했다.는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [
+      "DBCP",
+      "TOMCAT"
+    ],
+    "id": 4
+  },
+  {
+    "questionNumber": 5,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 핵심",
+    "title": "JVM Memory 튜닝",
+    "difficulty": "상급",
+    "points": 4,
+    "questionText": "Kubernetes 환경에서 Java 애플리케이션의 메모리 설정에 대한 설명 중 올바른 것은? resources: limits: memory: \"2Gi\" requests: memory: \"2Gi\" env: - name: JAVA_OPTS value: \"-XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0\"",
+    "choices": [
+      "① MaxRAMPercentage는 컨테이너 메모리 한계의 75%를 힙 메모리로 할당한다.",
+      "② InitialRAMPercentage는 애플리케이션 시작 시 힙 메모리 할당량을 결정한다.",
+      "③ 컨테이너 메모리가 2GB이므로 힙 메모리는 정확히 1.5GB가 할당된다.",
+      "④ Non-heap 메모리는 별도로 고려할 필요가 없다.",
+      "⑤ -Xms와 -Xmx 옵션이 더 정확한 메모리 제어를 제공한다."
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. MaxRAMPercentage는 컨테이너 메모리 한계의 75%를 힙 메모리로 할당한다.가 올바른 설명입니다.",
+    "keywords": [
+      "KUBERNETES"
+    ],
+    "id": 5
+  },
+  {
+    "questionNumber": 6,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 핵심",
+    "title": "Frontend Browser 객체 Scope",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "다음 JavaScript 코드의 실행 결과로 올바른 것은? var x = 1; function outer() { var x = 2; function inner() { console.log(x); var x = 3; console.log(x); } inner(); console.log(x); } outer(); console.log(x);",
+    "choices": [
+      "① 2, 3, 2, 1",
+      "② undefined, 3, 2, 1",
+      "③ 2, 3, 3, 1",
+      "④ undefined, 3, 3, 1",
+      "⑤ ReferenceError 발생"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. undefined, 3, 2, 1가 올바른 설명입니다.",
+    "keywords": [
+      "JAVASCRIPT"
+    ],
+    "id": 6
+  },
+  {
+    "questionNumber": 7,
+    "section": "예상문제 #1",
+    "module": "신기술",
+    "title": "Kubernetes Pod QoS 개념",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "Kubernetes에서 Pod의 QoS 클래스에 대한 설명 중 옳은 것은?",
+    "choices": [
+      "① Guaranteed 클래스는 requests와 limits가 동일하지 않아도 된다.",
+      "② Burstable 클래스는 requests만 설정되고 limits는 설정되지 않은 경우다.",
+      "③ BestEffort 클래스는 requests와 limits가 모두 설정되지 않은 경우다.",
+      "④ QoS 클래스는 스케줄링에만 영향을 미치고 리소스 회수에는 영향을 미치지 않는다.",
+      "⑤ 모든 컨테이너는 동일한 QoS 클래스를 가져야 한다."
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. BestEffort 클래스는 requests와 limits가 모두 설정되지 않은 경우다.",
+    "keywords": [
+      "KUBERNETES"
+    ],
+    "id": 7
+  },
+  {
+    "questionNumber": 8,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 설계/구축",
+    "title": "Spring Cloud Config 개념",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "Spring Cloud Config Server에 대한 설명 중 잘못된 것은?",
+    "choices": [
+      "① Git Repository를 백엔드 저장소로 사용할 수 있다.",
+      "② 설정 변경 시 애플리케이션을 재시작하지 않고 @RefreshScope를 통해 반영할 수 있다.",
+      "③ 암호화된 속성 값을 {cipher}로 표시하여 저장할 수 있다.",
+      "④ Config Client는 부팅 시점에만 설정을 가져올 수 있다.",
+      "⑤ 환경별(dev, prod) 설정 파일을 분리하여 관리할 수 있다."
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. 환경별(dev, prod) 설정 파일을 분리하여 관리할 수 있다.는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [
+      "SPRING",
+      "GIT",
+      "CLOUD"
+    ],
+    "id": 8
+  },
+  {
+    "questionNumber": 9,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 핵심",
+    "title": "CDN 기능과 활용",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "CDN(Content Delivery Network) 활용에 대한 설명 중 올바르지 않은 것은?",
+    "choices": [
+      "① 정적 콘텐츠 캐싱을 통해 오리진 서버의 부하를 줄일 수 있다.",
+      "② 사용자와 지리적으로 가까운 엣지 서버에서 콘텐츠를 제공한다.",
+      "③ 동적 콘텐츠는 CDN을 통해 캐싱할 수 없다.",
+      "④ Cache-Control 헤더를 통해 캐시 정책을 제어할 수 있다.",
+      "⑤ DDoS 공격 완화 기능을 제공할 수 있다."
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. 최신 CDN은 동적 콘텐츠도 캐싱할 수 있습니다. Edge Computing, API 캐싱, DSA 등을 통해 동적 콘텐츠 성능도 향상시킬 수 있습니다.",
+    "keywords": [],
+    "id": 9
+  },
+  {
+    "questionNumber": 10,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 환경",
+    "title": "HTTP Protocol 심화",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "HTTP/2 프로토콜의 특징에 대한 설명 중 잘못된 것은?",
+    "choices": [
+      "① 멀티플렉싱을 통해 하나의 커넥션에서 여러 요청을 동시에 처리할 수 있다.",
+      "② 서버 푸시 기능을 통해 클라이언트 요청 전에 리소스를 전송할 수 있다.",
+      "③ HPACK 압축을 통해 헤더 크기를 줄인다.",
+      "④ 텍스트 기반 프로토콜이므로 디버깅이 용이하다.",
+      "⑤ Stream 우선순위를 설정하여 중요한 리소스를 먼저 전송할 수 있다."
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. HTTP/2는 바이너리 프로토콜입니다. HTTP/1.1이 텍스트 기반이었던 것과 달리 바이너리로 인코딩되어 파싱은 효율적이지만 디버깅이 어렵습니다.",
+    "keywords": [
+      "HTTP"
+    ],
+    "id": 10
+  },
+  {
+    "questionNumber": 11,
+    "section": "예상문제 #1",
+    "module": "Software Architecture 핵심",
+    "title": "SAGA 패턴 개념",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "MSA 환경에서 분산 트랜잭션 처리를 위한 SAGA 패턴에 대한 설명으로 적절하지 않은 것은?",
+    "choices": [
+      "① Choreography 방식에서는 각 서비스가 자율적으로 다음 단계를 결정한다.",
+      "② Orchestration 방식에서는 중앙 조정자가 트랜잭션 흐름을 제어한다.",
+      "③ 보상 트랜잭션을 통해 실패한 단계를 롤백한다.",
+      "④ ACID 특성을 완전히 보장한다.",
+      "⑤ 이벤트 기반 아키텍처와 잘 결합된다."
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. ACID 특성을 완전히 보장한다.",
+    "keywords": [
+      "MSA",
+      "SAGA"
+    ],
+    "id": 11
+  },
+  {
+    "questionNumber": 12,
+    "section": "기타",
+    "module": "Software Architecture 핵심",
+    "title": "JWT 보안 고려사항",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "JWT(JSON Web Token) 사용 시 보안 고려사항으로 올바르지 않은 것은?",
+    "choices": [
+      "① JWT는 자동으로 암호화되어 페이로드 내용을 숨긴다",
+      "② JWT는 서버 측 세션 상태를 유지해야 한다",
+      "③ JWT의 만료 시간은 설정 후 변경할 수 없다",
+      "④ JWT는 Base64로 인코딩되어 있어 페이로드를 쉽게 디코딩할 수 있다",
+      "⑤ JWT 서명 검증 없이도 토큰의 유효성을 보장할 수 있다"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. JWT는 반드시 서명 검증을 해야 토큰의 무결성과 유효성을 보장할 수 있습니다. 서명 검증 없이는 위조된 토큰을 구별할 수 없습니다.",
+    "keywords": [
+      "JWT"
+    ],
+    "id": 12
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 운영/문제해결",
+    "title": "JVM 메모리 관리 및 성능 최적화",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "대한 설명 중 옳지 않은 것을 고르시오. bash $ jstat -gc 25847 5s S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC CCSU   YGC     YGCT    FGC    FGCT     GCT 17472.0 17472.0  0.0  16234.1  139648.0  139580.2  349568.0   342156.8  21248.0 20074.3 2560.0 2361.3   1847   12.456    23   8.923   21.379 17472.0 17472.0  0.0  16845.2  139648.0   5234.1   349568.0   348901.2  21248.0 20134.1 2560.0 2387.1   1851   12.478    24   9.456   21.934 17472.0 17472.0  0.0  17234.5  139648.0   45123.8  349568.0   348901.2  21248.0 20198.7 2560.0 2401.9   1855   12.501    24   9.456   21.957",
+    "choices": [
+      "① Young Generation에서 Minor GC가 정상적으로 동작하고 있으며, Eden 영역이 가득 찰 때마다 GC가 발생하고 있",
+      "② Old Generation 사용률이 약 99%에 달하여 곧 Full GC가 빈번하게 발생할 위험이 있다.",
+      "③ Survivor 영역 중 S1이 사용되고 있어 최근 Minor GC에서 S0에서 S1으로 객체가 이동했음을 알 수 있다.",
+      "④ 15초 동안 Minor GC가 8회 발생하여 GC 발생 빈도가 매우 높은 상태이다.",
+      "⑤ Metaspace 사용률이 약 94%로 높아 Class 로딩 관련 메모리 부족이 우려된다."
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. 실시간 시스템은 낮은 지연을 위해 ZGC나 G1GC, 배치 처리는 처리량을 위해 ParallelGC, 일반 웹은 균형잡힌 G1GC가 적합합니다.",
+    "keywords": [
+      "JVM",
+      "GC",
+      "Spring"
+    ],
+    "id": 13
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 운영/문제해결",
+    "title": "JVM 메모리 관리 및 성능 최적화",
+    "difficulty": "상급",
+    "points": 4,
+    "questionText": "힙 메모리 설정의 조합 중 문제가 될 수 있는 것을 고르시오. yaml # Pod 리소스 설정 resources: limits: memory: \"2Gi\" cpu: \"1\" requests: memory: \"1Gi\" cpu: \"0.5\"",
+    "choices": [
+      "① JVM 옵션: -Xms1g -Xmx1.5g",
+      "② JVM 옵션: -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0",
+      "③ JVM 옵션: -Xms512m -Xmx1792m",
+      "④ JVM 옵션: -XX:MaxRAMPercentage=95.0 -XX:MinRAMPercentage=80.0",
+      "⑤ JVM 옵션: -Xms1g -Xmx1g -XX:+UseContainerSupport"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. JVM 옵션: -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0",
+    "keywords": [
+      "JVM"
+    ],
+    "id": 14
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 운영/문제해결",
+    "title": "웹 애플리케이션에서 OutOfMemoryError가 발생한 후 Heap Dump를 분석한 결과 다음과 같은 정보를 얻었다. 이 상",
+    "difficulty": "하급",
+    "points": 3,
+    "questionText": "황에서 메모리 누수의 가장 가능성이 높은 원인을 고르시오. [Eclipse MAT Dominator Tree 분석 결과] Class Name                           Objects    Retained Heap java.util.concurrent.ConcurrentHashMap    1       156,789,456 bytes ├── java.util.concurrent.ConcurrentHashMap$Node[]  1  145,234,567 bytes ├── com.example.UserSession           45,678    98,765,432 bytes ├── java.sql.PreparedStatement        45,678    28,456,789 bytes └── org.apache.http.impl.client.CloseableHttpClient  12,345  18,567,890 bytes [GC Root 분석] Thread \"http-nio-8080-exec-1\" └── Static Variable: SessionManager.activeSessions └── ConcurrentHashMap",
+    "choices": [
+      "① PreparedStatement 객체들이 close()되지 않아 누적되고 있다.",
+      "② HTTP 커넥션이 정상적으로 해제되지 않아 메모리 누수가 발생했다.",
+      "③ 사용자 세션이 만료되어도 SessionManager에서 제거되지 않고 있다.",
+      "④ ConcurrentHashMap의 내부 배열이 동적으로 확장되면서 메모리를 과도하게 사용하고 있다.",
+      "⑤ 스레드 풀의 스레드들이 종료되지 않아 메모리가 해제되지 않고 있다."
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. 사용자 세션이 만료되어도 SessionManager에서 제거되지 않고 있다.",
+    "keywords": [
+      "HTTP"
+    ],
+    "id": 15
+  },
+  {
+    "questionNumber": 4,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 운영/문제해결",
+    "title": "JVM 메모리 관리 및 성능 최적화",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "조합을 고르시오. [애플리케이션 A] - 실시간 트레이딩 시스템, 응답시간 100ms 이내 필수 [애플리케이션 B] - 대용량 배치 처리, 처리량 최대화 필요 [애플리케이션 C] - 일반 웹 서비스, 8GB 힙 메모리 사용 옵션 조합JVM 설정 ① -XX:+UseG1GC -XX:MaxGCPauseMillis=50 ② -XX:+UseParallelGC -XX:ParallelGCThreads=8 You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제 예상 문제 #2 - JVM – 14 옵션 조합JVM 설정 ③ -XX:+UseZGC -XX:+UnlockExperimentalVMOptions ④ -XX:+UseG1GC -XX:MaxGCPauseMillis=200 ⑤ -XX:+UseSerialGC 애플리케이션 A, B, C에 가장 적절한 조합은?",
+    "choices": [
+      "① A-①, B-②, C-④",
+      "② A-③, B-②, C-①",
+      "③ A-①, B-④, C-②",
+      "④ A-③, B-②, C-④",
+      "⑤ A-②, B-③, C-①"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. A-①, B-④, C-②가 올바른 설명입니다.",
+    "keywords": [
+      "JVM",
+      "HTTP",
+      "HTTPS",
+      "GCP"
+    ],
+    "id": 16
+  },
+  {
+    "questionNumber": 5,
+    "section": "예상문제 #2 - JVM",
+    "module": "Software Architecture 운영/문제해결",
+    "title": "JVM 메모리 관리 및 성능 최적화",
+    "difficulty": "상급",
+    "points": 4,
+    "questionText": "찾으시오. java @RestController public class UserController { private static final Map<String, User> userCache = new ConcurrentHashMap<>(); private final ThreadLocal<UserContext> userContext = new ThreadLocal<>(); @PostMapping(\"/login\") public ResponseEntity<String> login(@RequestBody LoginRequest request) { User user = authenticateUser(request); // 사용자 정보 캐싱 userCache.put(user.getId(), user); // 스레드 로컬 설정 UserContext context = new UserContext(user); userContext.set(context); return ResponseEntity.ok(\"Login successful\"); } @PostMapping(\"/logout\") public ResponseEntity<String> logout(@RequestParam String userId) { // 캐시에서 사용자 제거 userCache.remove(userId); return ResponseEntity.ok(\"Logout successful\"); You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제 예상 문제 #2 - JVM – 15 } @GetMapping(\"/profile\") public ResponseEntity<User> getProfile() { UserContext context = userContext.get(); if (context != null) { return ResponseEntity.ok(context.getUser()); } return ResponseEntity.notFound().build(); } } 문제점과 해결방안:",
+    "choices": [
+      "① ThreadLocal이 static으로 선언되어 메모리 누수 발생 → 인스턴스 변수로 변경",
+      "② logout 시 ThreadLocal 정리 누락 → userContext.remove() 추가",
+      "③ 사용자 캐시 크기 제한 없음 → LRU 캐시로 변경",
+      "④ 동시성 제어 부족 → synchronized 블록 추가",
+      "⑤ 예외 처리 부족 → try-catch 블록 추가"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. ThreadLocal 사용 후 remove()를 호출하지 않으면 스레드 풀 환경에서 메모리 누수가 발생합니다.",
+    "keywords": [
+      "JVM",
+      "HTTP",
+      "HTTPS",
+      "REST"
+    ],
+    "id": 17
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #4 - Framework",
+    "module": "Software Architecture 설계/구축",
+    "title": "WAS 성능 최적화 - DBCP 설정",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 Tomcat 9 기반 프로젝트에서 DBCP(Database Connection Pool) 설정을 최적화하는 과정이다. 아래 설정에 서 성능 문제를 야기할 수 있는 잘못된 설정을 고르시오. xml <Resource name=\"jdbc/testDB\" auth=\"Container\" type=\"javax.sql.DataSource\" driverClassName=\"oracle.jdbc.driver.OracleDriver\" url=\"jdbc:oracle:thin:@localhost:1521:XE\" username=\"test\" password=\"test123\" maxTotal=\"50\" maxIdle=\"20\" minIdle=\"5\" initialSize=\"10\" maxWaitMillis=\"5000\" testOnBorrow=\"false\" testWhileIdle=\"true\" testOnReturn=\"false\" validationQuery=\"SELECT 1 FROM DUAL\" timeBetweenEvictionRunsMillis=\"30000\" minEvictableIdleTimeMillis=\"60000\" removeAbandonedOnMaintenance=\"true\" removeAbandonedTimeout=\"300\"/>",
+    "choices": [
+      "① maxTotal이 50으로 설정되어 있어 동시 접속자가 많을 경우 병목이 발생할 수 있다",
+      "② testOnBorrow가 false로 설정되어 있어 끊어진 커넥션을 사용할 가능성이 있다",
+      "③ minEvictableIdleTimeMillis가 60초로 설정되어 DB timeout보다 길 경우 문제가 발생할 수 있다",
+      "④ removeAbandonedTimeout이 300초로 너무 길어 리소스 누수가 발생할 수 있다",
+      "⑤ maxWaitMillis가 5초로 설정되어 있어 커넥션 대기 시간이 너무 짧다"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. testOnBorrow=false는 커넥션을 빌려줄 때 유효성 검증을 하지 않아 끊어진 연결이 사용될 수 있습니다. 안정적인 운영을 위해 testOnBorrow=true 설정이 필요합니다.",
+    "keywords": [
+      "DATABASE",
+      "DBCP",
+      "CONNECTION POOL",
+      "TOMCAT"
+    ],
+    "id": 18
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #4 - Framework",
+    "module": "Software Architecture 설계/구축",
+    "title": "JavaScript 스코프와 비동기 처리",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 JavaScript 코드의 실행 결과를 예측하시오. javascript for (var i = 0; i < 3; i++) { setTimeout(function() { console.log('A: ' + i); }, 100); } for (let j = 0; j < 3; j++) { setTimeout(function() { console.log('B: ' + j); }, 100); } async function test() { for (let k = 0; k < 3; k++) { await new Promise(resolve => { setTimeout(() => { console.log('C: ' + k); resolve(); }, 50); }); } } test(); 출력 순서와 값으로 올바른 것은?",
+    "choices": [
+      "① C: 0, C: 1, C: 2, A: 3, A: 3, A: 3, B: 0, B: 1, B: 2",
+      "② A: 3, A: 3, A: 3, B: 0, B: 1, B: 2, C: 0, C: 1, C: 2",
+      "③ C: 0, C: 1, C: 2, B: 0, B: 1, B: 2, A: 3, A: 3, A: 3",
+      "④ A: 0, A: 1, A: 2, B: 0, B: 1, B: 2, C: 0, C: 1, C: 2",
+      "⑤ 실행 순서가 브라우저마다 다르므로 예측할 수 없다"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. C: 0, C: 1, C: 2, A: 3, A: 3, A: 3, B: 0, B: 1, B: 2가 올바른 설명입니다.",
+    "keywords": [
+      "JAVASCRIPT"
+    ],
+    "id": 19
+  },
+  {
+    "questionNumber": 3,
+    "section": "기타",
+    "module": "Software Architecture 설계/구축",
+    "title": "Spring Boot 비동기 처리와 Thread Pool",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 Spring Boot에서 비동기 처리를 구현한 코드이다. 성능상 문제점과 해결방안으로 올바른 것을 고르시오. java @Service public class AsyncService { You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① @Async 애노테이션만 선언하면 비동기 처리가 자동으로 활성화된다",
+      "② WebFlux는 Servlet 기반 아키텍처를 사용한다",
+      "③ Reactive Streams는 백프레셔(backpressure)를 지원한다",
+      "④ Mono는 여러 개의 데이터를 비동기로 처리하는 타입이다",
+      "⑤ 블로킹 I/O와 논블로킹 I/O는 성능상 차이가 없다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. Reactive Streams는 백프레셔(backpressure)를 지원한다가 올바른 설명입니다.",
+    "keywords": [
+      "SPRING",
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 20
+  },
+  {
+    "questionNumber": 4,
+    "section": "기타",
+    "module": "Software Architecture 설계/구축",
+    "title": "TCP Connection Pool과 HTTP Keep-Alive",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 외부 API 호출을 위한 HTTP Client 설정이다. 성능 개선을 위한 설정 중 올바르지 않은 것을 고르시오. java @Configuration public class HttpClientConfig { You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① HTTP/2는 텍스트 기반 프로토콜이다",
+      "② 서버 푸시 기능은 클라이언트의 명시적 요청 없이 리소스를 전송할 수 있다",
+      "③ 헤더 압축은 GZIP 알고리즘을 사용한다",
+      "④ 멀티플렉싱으로 인해 Head-of-Line 블로킹이 완전히 해결된다",
+      "⑤ 스트림 우선순위는 서버에서만 설정할 수 있다"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. 스트림 우선순위는 서버에서만 설정할 수 있다는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [
+      "HTTP",
+      "HTTPS",
+      "API"
+    ],
+    "id": 21
+  },
+  {
+    "questionNumber": 5,
+    "section": "기타",
+    "module": "Software Architecture 설계/구축",
+    "title": "JVM Memory 최적화와 GC 튜닝",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음 JVM 옵션 설정에서 메모리 성능상 문제가 될 수 있는 설정을 고르시오. bash java -Xms2g -Xmx4g -XX:NewRatio=2 -XX:SurvivorRatio=8 -XX:MaxMetaspaceSize=256m -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=32m -XX:+PrintGC -XX:+PrintGCDetails MyApplication You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① JVM 힙 메모리 크기를 늘려 GC 발생 빈도를 줄인다",
+      "② Young Generation 크기를 조정하여 Minor GC 성능을 개선한다",
+      "③ Parallel GC를 G1GC로 변경하여 응답 시간을 개선한다",
+      "④ Old Generation이 가득 찰 때까지 Major GC를 지연시킨다",
+      "⑤ 메모리 누수를 방지하기 위해 모든 객체를 명시적으로 null 처리한다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. 실시간 시스템은 낮은 지연을 위해 ZGC나 G1GC, 배치 처리는 처리량을 위해 ParallelGC, 일반 웹은 균형잡힌 G1GC가 적합합니다.",
+    "keywords": [
+      "JVM",
+      "HTTP",
+      "HTTPS",
+      "GCP"
+    ],
+    "id": 22
+  },
+  {
+    "questionNumber": 6,
+    "section": "예상문제 #4 - Framework",
+    "module": "Software Architecture 설계/구축",
+    "title": "Reactive Programming과 WebFlux",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 Spring WebFlux 코드에서 발생할 수 있는 문제점을 고르시오. java @RestController public class ReactiveController { @Autowired private UserRepository userRepository; // Blocking Repository @GetMapping(\"/users\") public Flux<User> getUsers() { return Flux.fromIterable(userRepository.findAll()) // Blocking call .map(user -> { user.setLastAccess(new Date()); userRepository.save(user); // Another blocking call return user; }) .subscribeOn(Schedulers.boundedElastic()); } }",
+    "choices": [
+      "① Flux.fromIterable() 사용으로 메모리에 모든 데이터를 로드하게 된다",
+      "② blocking repository를 사용하여 reactive의 이점을 잃는다",
+      "③ subscribeOn(Schedulers.boundedElastic())이 잘못된 위치에 있다",
+      "④ map() 내부에서 side effect(save 호출)를 발생시키고 있다",
+      "⑤ 위의 모든 사항이 문제가 된다"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. 위의 모든 사항이 문제가 된다",
+    "keywords": [
+      "SPRING",
+      "REST",
+      "REACT"
+    ],
+    "id": 23
+  },
+  {
+    "questionNumber": 7,
+    "section": "기타",
+    "module": "Software Architecture 설계/구축",
+    "title": "DOM 조작과 브라우저 성능",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 JavaScript 코드 중 DOM 조작 성능상 가장 효율적인 방법은? javascript // 방법 1 for (let i = 0; i < 1000; i++) { You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① HTTP/2는 텍스트 기반 프로토콜로 HTTP/1.1과 동일한 구조를 사용한다",
+      "② 서버 푸시는 클라이언트가 명시적으로 요청하지 않은 리소스를 미리 전송하는 기능이다",
+      "③ HTTP/2의 헤더 압축은 GZIP 알고리즘을 사용한다",
+      "④ 멀티플렉싱으로 인해 Head-of-Line 블로킹이 완전히 해결된다",
+      "⑤ HTTP/2는 하나의 TCP 연결로만 통신이 가능하다"
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. 멀티플렉싱으로 인해 Head-of-Line 블로킹이 완전히 해결된다",
+    "keywords": [
+      "HTTP",
+      "HTTPS",
+      "JAVASCRIPT"
+    ],
+    "id": 24
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 1",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 대용량 거래 시스템에서 실시간 데이터 동기화를 위한 아키텍처 설계안이다. 이 설계에서 가장 큰 문제점을 고르 시오. 설계안: 핵심 거래 시스템에서 거래 발생 시 동기 방식으로 5개 백오피스 시스템에 순차적으로 데이터 전송 각 백오피스 시스템 응답 시간: 평균 200ms, 최대 2초 네트워크 타임아웃: 5초 하나의 시스템이라도 실패 시 전체 거래 롤백 ",
+    "choices": [
+      "① 네트워크 타임아웃이 너무 짧게 설정되어 있다",
+      "② 백오피스 시스템 장애 시 핵심 거래가 중단될 위험이 있다",
+      "③ 동기화 대상 시스템이 너무 많아 확장성에 문제가 있다",
+      "④ 순차 처리로 인해 총 응답시간이 길어진다",
+      "⑤ 데이터 일관성을 보장하기 어렵다"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. 백오피스 시스템 중 하나라도 장애가 발생하면 전체 거래가 롤백되므로, 핵심 거래 시스템이 중단될 위험이 있습니다. 이는 가용성을 심각하게 해치는 설계입니다.",
+    "keywords": [],
+    "id": 25
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 2",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "CDC(Change Data Capture) 구현 시 다음 상황에서 가장 적합한 방식을 고르시오",
+    "choices": [
+      "① 로그 기반 CDC - 데이터베이스 트랜잭션 로그를 읽어 변경사항 캡처",
+      "② 트리거 기반 CDC - 테이블에 트리거를 설정하여 변경사항 기록",
+      "③ 타임스탬프 기반 CDC - 마지막 수정 시간을 기준으로 변경 데이터 조회",
+      "④ 스냅샷 비교 - 주기적으로 전체 데이터를 비교하여 변경사항 탐지",
+      "⑤ 쿼리 기반 CDC - 주기적으로 쿼리를 실행하여 변경 데이터 추출"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. 로그 기반 CDC는 최소한의 성능 영향으로 실시간에 가까운 변경사항 캡처가 가능하며, 삭제된 데이터도 추적할 수 있습니다.",
+    "keywords": [
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 26
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 3",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 분산 환경에서 Order 생성 시 발생하는 데이터 동기화 과정이다. Saga 패턴 적용 시 3번 단계에서 실패했을 때의 올바른 보상 트랜잭션 순서를 고르시오. 정상 처리 순서: 주문 생성 (Order Service) 재고 차감 (Inventory Service) 결제 처리 (Payment Service) 배송 요청 (Shipping Service) 3번 단계 실패 시 보상 트랜잭션: ① 배송 취소 → 결제 취소 → 재고 복구 → 주문 취소 ② 재고 복구 → 주문 취소 ③ 주문 취소 → 재고 복구 ④ 결제 취소 → 재고 복구 → 주문 취소 ⑤ 모든 서비스에 대해 동시에 보상 트랜잭션 실행",
+    "choices": [
+      "① 재고 서비스에 InventoryReleased 이벤트를 발행해야 한다",
+      "② PaymentFailed 이벤트를 보상 트랜잭션으로 처리해야 한다",
+      "③ 결제 서비스에 PaymentRefund 이벤트를 발행해야 한다",
+      "④ 재고 예약을 취소하는 보상 이벤트를 발행해야 한다",
+      "⑤ 주문 취소 알림을 고객에게 전송해야 한다"
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. 결제 실패(Event 4) 이후 주문 취소(Event 5)가 발생했으므로, 이미 예약된 재고(Event 3)를 해제하는 보상 이벤트를 발행해야 합니다.",
+    "keywords": [
+      "SAGA"
+    ],
+    "id": 27
+  },
+  {
+    "questionNumber": 4,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 4",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Kafka를 이용한 실시간 데이터 동기화에서 다음 문제 상황의 원인과 해결방안을 서술하시오. 문제 상황: 고객 정보 변경 시 10개 마이크로서비스에 동기화 Topic: customer-events (파티션 3개) Consumer Group: customer-sync (컨슈머 10개) 현상: 일부 컨슈머는 메시지를 받지 못하고 idle 상태 지속 원인: _______________________________________________ 해결방안: ___________________________________________ You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① 재시도로 인한 중복: enable.idempotence=true 설정",
+      "② Consumer 재시작 시 중복: 수동 커밋 모드 사용",
+      "③ 네트워크 오류로 인한 중복: exactly-once 시맨틱 적용",
+      "④ 파티션 리밸런싱 중복: 트랜잭션 API 사용",
+      "⑤ Offset 관리 실패: 멱등성 키 기반 중복 제거"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. enable.idempotence=false로 설정되어 있어 재시도 시 중복 메시지가 발생합니다. enable.idempotence=true로 설정하면 Producer 레벨에서 중복을 방지할 수 있습니다.",
+    "keywords": [
+      "KAFKA",
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 28
+  },
+  {
+    "questionNumber": 5,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 5",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 중 Eventually Consistent 모델에 대한 설명으로 틀린 것을 고르시오. ① 분산 시스템에서 모든 노드가 동시에 일관된 상태를 유지할 필요는 없다. ② 시간이 지나면서 결국 모든 노드가 동일한 상태로 수렴한다. ③ 네트워크 파티션 상황에서도 가용성을 보장할 수 있다. ④ 읽기 작업 시 항상 최신 데이터를 보장한다. ⑤ NoSQL 데이터베이스에서 주로 사용되는 일관성 모델이다. 정답 및 해설",
+    "choices": [
+      "① HTTP/2는 텍스트 기반 프로토콜로 HTTP/1.1과 동일한 구조를 사용한다",
+      "② 서버 푸시는 클라이언트가 명시적으로 요청하지 않은 리소스를 미리 전송하는 기능이다",
+      "③ HTTP/2의 헤더 압축은 GZIP 알고리즘을 사용한다",
+      "④ 멀티플렉싱으로 인해 Head-of-Line 블로킹이 완전히 해결된다",
+      "⑤ HTTP/2는 하나의 TCP 연결로만 통신이 가능하다"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. HTTP/2는 하나의 TCP 연결로만 통신이 가능하다는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [],
+    "id": 29
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 1",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 금융시스템에서 계좌잔고 동기화를 위한 트랜잭션 처리 시나리오이다. 문제점 2개를 고르시오. 시나리오: 1. 고객이 ATM에서 10만원 출금 요청 2. 계좌 시스템에서 잔고 차감 (200만원 → 190만원) 3. EAI를 통해 다음 시스템들에 순차적으로 전송: - 회계 시스템 (거래내역 기록) - CRM 시스템 (고객 거래패턴 분석) - 리스크 시스템 (이상거래 탐지) 4. 3번 과정에서 CRM 시스템 장애 발생 5. 전체 트랜잭션 롤백하여 계좌잔고 200만원으로 복구 6. 고객에게는 이미 현금 10만원 지급 완료 ① CRM 시스템 장애로 인한 전체 트랜잭션 롤백 ② 동기식 처리로 인한 응답시간 지연 ③ 물리적 현금 지급과 논리적 잔고 차감의 불일치 ④ EAI에서 순차 처리로 인한 성능 저하 ⑤ 리스크 시스템 연동 순서의 부적절성",
+    "choices": [
+      "① CRM 시스템 장애로 인한 전체 트랜잭션 롤백",
+      "② 동기식 처리로 인한 응답시간 지연",
+      "③ 물리적 현금 지급과 논리적 잔고 차감의 불일치",
+      "④ EAI에서 순차 처리로 인한 성능 저하",
+      "⑤ 리스크 시스템 연동 순서의 부적절성"
+    ],
+    "answer": "③⑤",
+    "explanation": "③번과 ⑤번이 정답입니다. ③ 현금이 이미 지급되었는데 롤백으로 잔고가 복구되면 불일치가 발생합니다. ⑤ 리스크 시스템은 거래 전에 먼저 체크해야 하는데 거래 후에 체크하고 있습니다.",
+    "keywords": [
+      "EAI"
+    ],
+    "id": 30
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 2",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "Spring Boot 애플리케이션에서 **@Transactional(propagation = REQUIRES_NEW)**를 사용한 메서드가 외부 시스 템과 데이터 동기화를 수행할 때 발생할 수 있는 문제로 가장 적절한 것은? java @Service public class OrderService { @Transactional public void createOrder(Order order) { orderRepository.save(order); sendToInventorySystem(order);  // 외부 재고시스템 호출 sendToPaymentSystem(order);    // 외부 결제시스템 호출 } @Transactional(propagation = REQUIRES_NEW) private void sendToInventorySystem(Order order) { // 외부 시스템 호출 로직 inventoryClient.updateStock(order); } } You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① 기존 트랜잭션이 있으면 참여하고, 없으면 새로 생성한다",
+      "② 항상 새로운 트랜잭션을 생성한다",
+      "③ 기존 트랜잭션이 있어야만 실행된다",
+      "④ 트랜잭션 없이 실행된다",
+      "⑤ 중첩된 트랜잭션을 생성한다"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. REQUIRES_NEW는 항상 새로운 트랜잭션을 생성하며, 기존 트랜잭션이 있으면 일시 중단시킵니다.",
+    "keywords": [
+      "SPRING",
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 31
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 3",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 MSA 환경에서 이벤트 소싱(Event Sourcing) 패턴을 적용한 주문 시스템이다. 아래 설명 중 올바른 것을 고르시 오. 이벤트 스토어 내용: Event 1: OrderCreated {orderId: \"O001\", customerId: \"C001\", amount: 50000} Event 2: PaymentProcessed {orderId: \"O001\", paymentId: \"P001\", amount: 50000} Event 3: InventoryReserved {orderId: \"O001\", productId: \"PR001\", quantity: 2} Event 4: PaymentFailed {orderId: \"O001\", paymentId: \"P001\", reason: \"카드한도초과\"} Event 5: OrderCancelled {orderId: \"O001\", reason: \"결제실패\"} ① 현재 주문 O001의 상태는 \"결제완료\"이다 ② Event 4 발생 시 Event 2를 삭제해야 한다 ③ 주문 상태 조회 시 모든 이벤트를 순차적으로 재생해야 한다 ④ Event 5로 인해 재고 예약이 자동으로 해제된다 ⑤ 이벤트는 수정이 불가능하므로 보상 이벤트로 처리해야 한다",
+    "choices": [
+      "① 현재 주문 O001의 상태는 \"결제완료\"이다",
+      "② Event 4 발생 시 Event 2를 삭제해야 한다",
+      "③ 주문 상태 조회 시 모든 이벤트를 순차적으로 재생해야 한다",
+      "④ Event 5로 인해 재고 예약이 자동으로 해제된다",
+      "⑤ 이벤트는 수정이 불가능하므로 보상 이벤트로 처리해야 한다"
+    ],
+    "answer": "③⑤",
+    "explanation": "③번과 ⑤번이 정답입니다. ③ 이벤트 소싱에서는 현재 상태를 얻기 위해 모든 이벤트를 재생합니다. ⑤ 이벤트는 불변이므로 취소나 수정이 필요하면 보상 이벤트를 발행합니다.",
+    "keywords": [
+      "MSA"
+    ],
+    "id": 32
+  },
+  {
+    "questionNumber": 4,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 4",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Apache Kafka 환경에서 다음과 같은 메시지 중복 처리 문제가 발생했다. 원인과 해결방안을 서술하시오. 상황: 주문 생성 시 재고 차감 메시지를 Kafka로 전송 재고 서비스에서 동일한 주문에 대해 재고가 2번 차감됨 프로듀서 설정: acks=all, retries=3, enable.idempotence=false 컨슈머 설정: enable.auto.commit=true, auto.commit.interval.ms=5000 중복 처리 발생 원인: _________________________________ 해결방안 (2가지): ___________________________________",
+    "choices": [
+      "① enable.idempotence=false로 인한 Producer 중복 전송",
+      "② auto.commit으로 인한 Consumer 중복 처리",
+      "③ 네트워크 재시도로 인한 중복 메시지",
+      "④ Consumer 재시작 시 offset 손실",
+      "⑤ 파티션 리밸런싱 중 메시지 중복 처리"
+    ],
+    "answer": "①②",
+    "explanation": "①번과 ②번이 정답입니다. Producer의 idempotence가 비활성화되어 재시도 시 중복이 발생하고, Consumer의 auto commit으로 처리 실패 시 같은 메시지를 재처리할 수 있습니다.",
+    "keywords": [
+      "KAFKA"
+    ],
+    "id": 33
+  },
+  {
+    "questionNumber": 5,
+    "section": "기타",
+    "module": "기타",
+    "title": "기타 문제 5",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 중 **분산 락(Distributed Lock)**을 사용해야 하는 상황으로 가장 적절한 것은? ① 단일 데이터베이스에서 트랜잭션 처리 ② 읽기 전용 캐시 데이터 조회 ③ 로그 파일 순차 기록 ④ 여러 인스턴스에서 동일한 스케줄 작업 실행 방지 ⑤ 메시지 큐의 순서 보장 You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① HTTP/2는 텍스트 기반 프로토콜로 HTTP/1.1과 동일한 구조를 사용한다",
+      "② 서버 푸시는 클라이언트가 명시적으로 요청하지 않은 리소스를 미리 전송하는 기능이다",
+      "③ HTTP/2의 헤더 압축은 GZIP 알고리즘을 사용한다",
+      "④ 멀티플렉싱으로 인해 Head-of-Line 블로킹이 완전히 해결된다",
+      "⑤ HTTP/2는 하나의 TCP 연결로만 통신이 가능하다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. HTTP/2의 헤더 압축은 GZIP 알고리즘을 사용한다가 올바른 설명입니다.",
+    "keywords": [
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 34
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 1",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음은 마이크로서비스 환경에서 분산 트랜잭션 처리를 위한 패턴들이다. 각 패턴의 특징에 대한 설명 중 틀린 것을 2개 고르시오. ① 2PC(Two-Phase Commit): 모든 참여 서비스가 PREPARE 단계에서 준비 완료 응답을 보내야 COMMIT 단계가 실 행된다. ② Saga Choreography: 각 서비스가 로컬 트랜잭션 완료 후 다음 서비스에게 직접 이벤트를 발행하는 방식이다. ③ Saga Orchestration: 중앙 조정자가 모든 서비스의 트랜잭션을 관리하므로 ACID 속성을 완벽하게 보장한다. ④ TCC(Try-Confirm-Cancel): Try 단계에서 리소스 예약, Confirm에서 확정, Cancel에서 해제하는 3단계로 구성된 다. ⑤ Outbox Pattern: 비즈니스 데이터와 이벤트를 같은 트랜잭션 내에서 저장하여 메시지 발행을 보장한다.",
+    "choices": [
+      "① SAGA 패턴은 ACID 속성을 완전히 보장한다",
+      "② Service Mesh는 애플리케이션 코드 수정 없이 서비스 간 통신을 제어한다",
+      "③ Circuit Breaker는 모든 종류의 오류에 대해 동일하게 반응한다",
+      "④ 분산 트랜잭션에서는 2PC(Two-Phase Commit)가 항상 최적의 선택이다",
+      "⑤ Microservice 간 통신은 반드시 동기 방식을 사용해야 한다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. Saga Orchestration도 ACID를 완벽하게 보장하지 않습니다. SAGA 패턴은 BASE 특성을 따르며 최종 일관성만 보장합니다.",
+    "keywords": [
+      "SAGA"
+    ],
+    "id": 35
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 2",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "다음 Redis를 활용한 분산 락 구현에서 발생할 수 있는 문제 상황으로 가장 적절한 것은? java @Service public class DistributedLockService { @Autowired private RedisTemplate<String, String> redisTemplate; public boolean acquireLock(String lockKey, int timeoutSeconds) { String lockValue = UUID.randomUUID().toString(); Boolean result = redisTemplate.opsForValue() .setIfAbsent(lockKey, lockValue, Duration.ofSeconds(timeoutSeconds)); return Boolean.TRUE.equals(result); } public void releaseLock(String lockKey, String lockValue) { String script = \"if redis.call('get', KEYS[1]) == ARGV[1] then \" + \"return redis.call('del', KEYS[1]) \" + \"else return 0 end\"; redisTemplate.execute(new DefaultRedisScript<>(script, Long.class), Arrays.asList(lockKey), lockValue); } } ① Redis 클러스터 환경에서 마스터-슬레이브 간 복제 지연으로 인한 락 중복 획득 ② lockValue를 UUID로 생성하여 예측 가능성 문제 발생 ③ Lua 스크립트 실행 중 메모리 부족으로 인한 성능 저하 ④ setIfAbsent 연산의 원자성 보장 부족 ⑤ 락 타임아웃 설정으로 인한 데드락 발생 You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① JVM 힙 메모리 크기를 늘려 GC 발생 빈도를 줄인다",
+      "② Young Generation 크기를 조정하여 Minor GC 성능을 개선한다",
+      "③ Parallel GC를 G1GC로 변경하여 응답 시간을 개선한다",
+      "④ Old Generation이 가득 찰 때까지 Major GC를 지연시킨다",
+      "⑤ 메모리 누수를 방지하기 위해 모든 객체를 명시적으로 null 처리한다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. Parallel GC를 G1GC로 변경하여 응답 시간을 개선한다가 올바른 설명입니다.",
+    "keywords": [
+      "REDIS",
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 36
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 3",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "이벤트 스토어(Event Store) 기반 시스템에서 다음과 같은 이벤트 시퀀스가 저장되었다. 이에 대한 분석 중 올바른 것을 고르시오. json 이벤트 스토어: [ {\"eventId\": \"e1\", \"aggregateId\": \"order-001\", \"eventType\": \"OrderCreated\", \"timestamp\": \"2025-01-01T10:00:00Z\", \"version\": 1}, {\"eventId\": \"e2\", \"aggregateId\": \"order-001\", \"eventType\": \"PaymentRequested\", \"timestamp\": \"2025-01-01T10:01:00Z\", \"version\": 2}, {\"eventId\": \"e3\", \"aggregateId\": \"order-001\", \"eventType\": \"InventoryReserved\", \"timestamp\": \"2025-01-01T10:02:00Z\", \"version\": 3}, {\"eventId\": \"e4\", \"aggregateId\": \"order-001\", \"eventType\": \"PaymentFailed\", \"timestamp\": \"2025-01-01T10:03:00Z\", \"version\": 4}, {\"eventId\": \"e5\", \"aggregateId\": \"order-001\", \"eventType\": \"InventoryReleased\", \"timestamp\": \"2025-01-01T10:04:00Z\", \"version\": 5} ] ① 현재 order-001의 상태는 \"결제 실패\"이므로 주문이 취소된 상태이다. ② 이벤트 e4 발생 시 e2 이벤트를 삭제하여 일관성을 유지해야 한다. ③ version 필드는 동시성 제어를 위한 낙관적 락으로 사용될 수 있다. ④ 이벤트 순서를 바꿔서 PaymentFailed를 먼저 처리하면 더 효율적이다. ⑤ 스냅샷 없이는 현재 상태 조회가 불가능하다.",
+    "choices": [
+      "① EAI 허브 방식은 포인트 투 포인트 방식보다 시스템 간 결합도가 높다",
+      "② 실시간 동기화에서는 항상 동기 방식이 비동기 방식보다 우수하다",
+      "③ SAGA 패턴은 분산 환경에서 데이터 일관성을 보장하기 위한 보상 트랜잭션 메커니즘이다",
+      "④ 2PC(Two-Phase Commit)는 네트워크 분할 상황에서도 완벽하게 동작한다",
+      "⑤ 트랜잭션 ID 추적은 시스템 성능에 부정적 영향만 미친다"
+    ],
+    "answer": "③",
+    "explanation": "③번이 정답입니다. SAGA 패턴은 분산 환경에서 데이터 일관성을 보장하기 위한 보상 트랜잭션 메커니즘이다가 올바른 설명입니다.",
+    "keywords": [],
+    "id": 37
+  },
+  {
+    "questionNumber": 4,
+    "section": "기타",
+    "module": "기타",
+    "title": "기타 문제 4",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "다음 CDC(Change Data Capture) 구현에서 발생한 성능 문제의 원인과 해결방안을 서술하시오. 상황: MySQL 바이너리 로그 기반 CDC 구현 초당 5,000건의 트랜잭션 처리 CDC 애플리케이션이 바이너리 로그를 실시간으로 읽어 Kafka로 전송 최근 CDC 지연이 30분까지 발생하며 메모리 사용률이 90% 초과 CDC 애플리케이션 구성: 단일 스레드로 바이너리 로그 순차 처리 메모리에 변경 이벤트를 1,000개씩 배치로 누적 후 Kafka 전송 Kafka Producer 설정: batch.size=1000, linger.ms=100 지연 발생 원인: ________________________________________ 해결방안 (2가지): ____________________________________ You are using an UNLICENSED copy of Scroll PDF Exporter for Confluence . Do you find Scroll PDF Exporter useful? Consider purchasing it today: https://marketplace.atlassian.com/apps/7019/scroll-pdf-exporter-for-confluence?tab=overview&hosting=datacenter Software Architect – 예상문제",
+    "choices": [
+      "① 폴링 주기가 너무 짧아 데이터베이스 부하 증가",
+      "② 대량 데이터 변경 시 메모리 부족",
+      "③ 삭제된 데이터를 추적할 수 없음",
+      "④ 트랜잭션 중간 상태가 캡처될 수 있음",
+      "⑤ 실시간 동기화가 불가능함"
+    ],
+    "answer": "①③",
+    "explanation": "①번과 ③번이 정답입니다. 타임스탬프 기반 CDC는 주기적 폴링으로 DB 부하를 주고, 삭제된 데이터는 조회할 수 없어 추적이 불가능합니다.",
+    "keywords": [
+      "KAFKA",
+      "HTTP",
+      "HTTPS"
+    ],
+    "id": 38
+  },
+  {
+    "questionNumber": 5,
+    "section": "예상문제 #5 - I/F 기반 Data 동기화",
+    "module": "기타",
+    "title": "예상문제 #5 - I/F 기반 Data 동기화 문제 5",
+    "difficulty": "중급",
+    "points": 3,
+    "questionText": "Apache Kafka의 Exactly-Once Semantics 구현에 대한 설명 중 틀린 것을 고르시오. ① enable.idempotence=true 설정으로 Producer 레벨에서 중복 메시지 전송을 방지할 수 있다. ② Transactional Producer를 사용하면 여러 토픽에 대한 메시지 전송을 원자적으로 처리할 수 있다. ③ Consumer에서 isolation.level=read_committed 설정 시 커밋된 메시지만 읽을 수 있다. ④ Kafka Streams의 processing.guarantee=exactly_once 설정으로 완벽한 Exactly-Once를 보장한다. ⑤ Transactional ID는 Producer 재시작 시에도 동일하게 유지되어 zombie producer 문제를 해결한다. 정답 및 해설",
+    "choices": [
+      "① 파티션 수를 늘리면 항상 처리량이 향상된다",
+      "② Producer의 배치 크기가 클수록 latency가 감소한다",
+      "③ 복제 팩터를 높이면 가용성이 향상되지만 성능은 저하될 수 있다",
+      "④ Consumer Group 내의 모든 Consumer는 동일한 파티션을 처리한다",
+      "⑤ Redis Cluster에서 모든 노드는 전체 데이터를 복제한다"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. Redis Cluster에서 모든 노드는 전체 데이터를 복제한다는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [
+      "KAFKA"
+    ],
+    "id": 39
+  },
+  {
+    "questionNumber": 1,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Kafka Cluster 설정 및 성능 최적화",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Kafka 클러스터 환경에서 높은 처리량을 위한 최적화 설정 중 올바르지 않은 것은?",
+    "choices": [
+      "① num.network.threads를 CPU 코어 수의 2배로 설정",
+      "② log.segment.bytes를 1GB로 크게 설정하여 세그먼트 생성 빈도 감소",
+      "③ batch.size를 증가시켜 네트워크 처리량 향상",
+      "④ compression.type을 lz4로 설정하여 압축 성능 향상",
+      "⑤ replica.fetch.max.bytes를 작게 설정하여 메모리 사용량 최적화"
+    ],
+    "answer": "⑤",
+    "explanation": "⑤번이 정답입니다. replica.fetch.max.bytes를 작게 설정하여 메모리 사용량 최적화는 잘못된 설명입니다. 이는 해당 기술의 핵심 원리와 맞지 않습니다.",
+    "keywords": [
+      "KAFKA"
+    ],
+    "id": 40
+  },
+  {
+    "questionNumber": 2,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Redis Cluster 고가용성 구성",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Redis Cluster 환경에서 고가용성을 보장하기 위한 설정 중 적절하지 않은 것은?",
+    "choices": [
+      "① 각 마스터 노드마다 최소 1개의 슬레이브 노드 구성",
+      "② cluster-require-full-coverage를 yes로 설정",
+      "③ cluster-node-timeout을 5초로 설정",
+      "④ 홀수 개의 마스터 노드로 구성하여 split-brain 방지",
+      "⑤ maxmemory-policy를 allkeys-lru로 설정"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. cluster-require-full-coverage를 yes로 설정",
+    "keywords": [
+      "REDIS"
+    ],
+    "id": 41
+  },
+  {
+    "questionNumber": 3,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Kafka Consumer Group 리밸런싱",
+    "difficulty": "상급",
+    "points": 5,
+    "questionText": "Kafka Consumer Group에서 리밸런싱 과정 중 발생할 수 있는 문제와 해결방안으로 올바른 것은?",
+    "choices": [
+      "① Stop-the-world 현상으로 인한 처리 중단 → session.timeout.ms 증가",
+      "② Eager 리밸런싱으로 인한 불필요한 파티션 재할당 → Cooperative 리밸런싱 사용",
+      "③ 컨슈머 추가 시 처리량 감소 → max.poll.records 감소",
+      "④ 리밸런싱 빈도 증가 → heartbeat.interval.ms 증가",
+      "⑤ 파티션 할당 불균형 → sticky assignor 사용"
+    ],
+    "answer": "②",
+    "explanation": "②번이 정답입니다. Eager 리밸런싱으로 인한 불필요한 파티션 재할당 → Cooperative 리밸런싱 사용가 올바른 설명입니다.",
+    "keywords": [
+      "KAFKA"
+    ],
+    "id": 42
+  },
+  {
+    "questionNumber": 4,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Redis 메모리 최적화",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Redis 메모리 사용량 최적화를 위한 설정 중 가장 효과적인 것은?",
+    "choices": [
+      "① hash-max-ziplist-entries를 512에서 1024로 증가",
+      "② set-max-intset-entries를 512에서 256으로 감소",
+      "③ list-max-ziplist-size를 -2에서 -1로 변경",
+      "④ zset-max-ziplist-entries를 128에서 64로 감소",
+      "⑤ activerehashing을 no로 설정"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. hash-max-ziplist-entries를 512에서 1024로 증가",
+    "keywords": [
+      "REDIS"
+    ],
+    "id": 43
+  },
+  {
+    "questionNumber": 5,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Kafka Stream Processing",
+    "difficulty": "상급",
+    "points": 5,
+    "questionText": "Kafka Streams 애플리케이션에서 발생할 수 있는 문제 상황과 해결방안으로 올바른 것은?",
+    "choices": [
+      "① 윈도우 연산 시 메모리 부족 → cache.max.bytes.buffering 증가",
+      "② 처리 지연 시 오프셋 커밋 실패 → commit.interval.ms 감소",
+      "③ 리파티셔닝으로 인한 성능 저하 → 카우니 키 분산",
+      "④ 상태 저장소 복구 시간 증가 → num.standby.replicas 감소",
+      "⑤ 토폴로지 변경 시 재처리 필요 → application.id 변경"
+    ],
+    "answer": "①",
+    "explanation": "①번이 정답입니다. 윈도우 연산 시 메모리 부족 → cache.max.bytes.buffering 증가가 올바른 설명입니다.",
+    "keywords": [
+      "KAFKA"
+    ],
+    "id": 44
+  },
+  {
+    "questionNumber": 6,
+    "section": "예상문제 #6 - Kafka/Redis",
+    "module": "Software Architecture 핵심",
+    "title": "Redis Sentinel 구성",
+    "difficulty": "중급",
+    "points": 4,
+    "questionText": "Redis Sentinel을 이용한 고가용성 구성에서 다음 중 올바른 설정은?",
+    "choices": [
+      "① Sentinel 노드는 최소 2개로 구성",
+      "② down-after-milliseconds를 30초로 설정",
+      "③ parallel-syncs를 마스터 수와 동일하게 설정",
+      "④ quorum을 전체 Sentinel 노드 수의 과반수로 설정",
+      "⑤ failover-timeout을 10초로 설정"
+    ],
+    "answer": "④",
+    "explanation": "④번이 정답입니다. quorum을 전체 Sentinel 노드 수의 과반수로 설정가 올바른 설명입니다.",
+    "keywords": [
+      "REDIS"
+    ],
+    "id": 45
+  }
+]
